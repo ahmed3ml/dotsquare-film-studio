@@ -1,0 +1,11 @@
+#!/bin/sh
+# media-crop <input image|video> <x> <y> <w> <h> <scale> <out.png> [time_s]
+# Native-pixel crop + upscale for reviewers. Output only under projects/*/reviews/evidence/.
+set -e
+[ $# -ge 7 ] || { echo "usage: media-crop IN X Y W H SCALE OUT.png [TIME_S]" >&2; exit 2; }
+IN="$1"; X="$2"; Y="$3"; W="$4"; H="$5"; S="$6"; OUT="$7"; T="${8:-0}"
+case "$OUT" in projects/*/reviews/evidence/*.png) ;; *) echo "OUT must be projects/<id>/reviews/evidence/*.png" >&2; exit 2;; esac
+case "$OUT" in *..*) echo "no .. in OUT" >&2; exit 2;; esac
+for v in "$X" "$Y" "$W" "$H" "$S" "$T"; do case "$v" in *[!0-9.]*|"") echo "numeric args only" >&2; exit 2;; esac; done
+mkdir -p "$(dirname "$OUT")"
+exec ffmpeg -nostdin -loglevel error -y -ss "$T" -i "$IN" -frames:v 1 -vf "crop=$W:$H:$X:$Y,scale=iw*$S:ih*$S:flags=lanczos" "$OUT"

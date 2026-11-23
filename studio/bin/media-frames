@@ -1,0 +1,12 @@
+#!/bin/sh
+# media-frames <video> <start_s> <duration_s> <outdir> [fps]
+# Full-rate (or given fps) frame extraction for motion checks. Outdir only under projects/*/reviews/evidence/.
+set -e
+[ $# -ge 4 ] || { echo "usage: media-frames VIDEO START_S DUR_S OUTDIR [FPS]" >&2; exit 2; }
+IN="$1"; SS="$2"; D="$3"; OD="$4"; F="${5:-24}"
+case "$OD" in projects/*/reviews/evidence/*) ;; *) echo "OUTDIR must be under projects/<id>/reviews/evidence/" >&2; exit 2;; esac
+case "$OD" in *..*) echo "no .. in OUTDIR" >&2; exit 2;; esac
+for v in "$SS" "$D" "$F"; do case "$v" in *[!0-9.]*|"") echo "numeric args only" >&2; exit 2;; esac; done
+awk "BEGIN{exit !($D<=3)}" || { echo "DUR_S max 3" >&2; exit 2; }
+mkdir -p "$OD"
+exec ffmpeg -nostdin -loglevel error -y -ss "$SS" -t "$D" -i "$IN" -vf "fps=$F" -q:v 3 "$OD/f_%03d.jpg"

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "flow": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/ahmedabdelrahman/flow-mcp/dist/index.js"],
+      "env": {"FLOW_MCP_OUTPUT": "/Users/ahmedabdelrahman/Desktop/web/DotSquare buss/AI-Film-Studio/projects/MUTAH-PILOT/media/flow_raw"}
+    }
+  }
+}

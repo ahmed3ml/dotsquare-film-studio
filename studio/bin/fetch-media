@@ -1,0 +1,11 @@
+#!/bin/sh
+# fetch-media <https-url> <projects/<id>/media/...>  - download a provider result into the project media folder
+set -e
+[ $# -eq 2 ] || { echo "usage: fetch-media URL OUT" >&2; exit 2; }
+URL="$1"; OUT="$2"
+case "$URL" in https://*) ;; *) echo "URL must be https" >&2; exit 2;; esac
+case "$OUT" in projects/*/media/*) ;; *) echo "OUT must be under projects/<id>/media/" >&2; exit 2;; esac
+case "$OUT" in *..*) echo "no .. in OUT" >&2; exit 2;; esac
+mkdir -p "$(dirname "$OUT")"
+curl -fsSL --max-time 120 -o "$OUT" "$URL"
+ls -l "$OUT"

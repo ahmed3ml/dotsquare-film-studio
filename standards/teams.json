@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.0",
+  "note": "Registry of studio teams. NOT a Claude Code team definition (Agent Teams are created at runtime by the lead; .claude/teams is not read). Used by `studio.py teams` and the /studio-team command.",
+  "teams": {
+    "historical_research": {
+      "mission": "Establish what is known, disputed and unknown about the event with an auditable source register.",
+      "mode": "subagents",
+      "why_this_mode": "Bounded research questions fan out well as isolated subagents; no inter-agent debate needed.",
+      "creators": [
+        "historical-researcher"
+      ],
+      "reviewers": [
+        "historical-fact-checker"
+      ],
+      "inputs": [
+        "PROJECT.md"
+      ],
+      "outputs": [
+        "HISTORICAL_BIBLE.md"
+      ],
+      "depends_on": [],
+      "review_sets": [
+        "historical_research"
+      ],
+      "acceptance": "All criteria of set historical_research PASS with evidence; fact-checker independently re-verified sources for core claims.",
+      "spawn_prompt": "Create an agent team for 'historical_research'. Spawn teammates using these agent types: historical-researcher, historical-fact-checker. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce HISTORICAL_BIBLE.md; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "story_development": {
+      "mission": "Find the strongest dramatic angle for 5 minutes centred on the protagonist without bending history.",
+      "mode": "agent_team",
+      "why_this_mode": "Competing story angles benefit from teammates challenging each other directly.",
+      "creators": [
+        "story-developer",
+        "historical-researcher"
+      ],
+      "reviewers": [
+        "dramaturg-reviewer",
+        "historical-fact-checker"
+      ],
+      "inputs": [
+        "HISTORICAL_BIBLE.md (approved)",
+        "PROJECT.md"
+      ],
+      "outputs": [
+        "STORY_TREATMENT.md"
+      ],
+      "depends_on": [
+        "historical_research"
+      ],
+      "review_sets": [
+        "story_treatment"
+      ],
+      "acceptance": "Set story_treatment all PASS; competing angles were compared and the choice justified.",
+      "spawn_prompt": "Create an agent team for 'story_development'. Spawn teammates using these agent types: story-developer, historical-researcher, dramaturg-reviewer, historical-fact-checker. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce STORY_TREATMENT.md; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "screenwriting_script_review": {
+      "mission": "Turn the approved treatment into a screenplay and iterate with independent critics.",
+      "mode": "hybrid",
+      "why_this_mode": "Writer plus two critics iterate quickly when they can message directly; fallback is write-review-revise through the EP.",
+      "creators": [
+        "screenwriter"
+      ],
+      "reviewers": [
+        "script-reviewer",
+        "dramaturg-reviewer"
+      ],
+      "inputs": [
+        "STORY_TREATMENT.md (approved)",
+        "HISTORICAL_BIBLE.md (approved)"
+      ],
+      "outputs": [
+        "SCREENPLAY.md",
+        "reviews/SCRIPT_REVIEW.md"
+      ],
+      "depends_on": [
+        "story_development"
+      ],
+      "review_sets": [
+        "screenplay"
+      ],
+      "acceptance": "Set screenplay all PASS incl. English dialogue quality and historical consistency; no BLOCKER finding open.",
+      "spawn_prompt": "Create an agent team for 'screenwriting_script_review'. Spawn teammates using these agent types: screenwriter, script-reviewer, dramaturg-reviewer. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce SCREENPLAY.md, reviews/SCRIPT_REVIEW.md; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "film_direction_cinematography": {
+      "mission": "Define the visual language, blocking and camera strategy as one coherent vision.",
+      "mode": "agent_team",
+      "why_this_mode": "Director and DP must negotiate lenses, light and movement directly.",
+      "creators": [
+        "film-director",
+        "cinematographer"
+      ],
+      "reviewers": [
+        "continuity-supervisor"
+      ],
+      "inputs": [
+        "SCREENPLAY.md (approved)",
+        "HISTORICAL_BIBLE.md"
+      ],
+      "outputs": [
+        "Director's Plan (VISUAL_STYLE_GUIDE.md section)",
+        "reviews/DIRECTORS_PLAN.md"
+      ],
+      "depends_on": [
+        "screenwriting_script_review"
+      ],
+      "review_sets": [
+        "visual_bible"
+      ],
+      "acceptance": "Director and cinematographer agree on one plan; continuity-supervisor found no spatial/temporal contradiction.",
+      "spawn_prompt": "Create an agent team for 'film_direction_cinematography'. Spawn teammates using these agent types: film-director, cinematographer, continuity-supervisor. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce Director's Plan (VISUAL_STYLE_GUIDE.md section), reviews/DIRECTORS_PLAN.md; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "character_environment_design": {
+      "mission": "Create reproducible identity locks, environments, props and style rules.",
+      "mode": "subagents",
+      "why_this_mode": "One owner of visual identity prevents divergence; independent reviewers check from different angles.",
+      "creators": [
+        "visual-development-supervisor"
+      ],
+      "reviewers": [
+        "historical-fact-checker",
+        "continuity-supervisor"
+      ],
+      "inputs": [
+        "SCREENPLAY.md (approved)",
+        "HISTORICAL_BIBLE.md"
+      ],
+      "outputs": [
+        "CHARACTER_BIBLE.md",
+        "ENVIRONMENT_BIBLE.md",
+        "VISUAL_STYLE_GUIDE.md"
+      ],
+      "depends_on": [
+        "screenwriting_script_review"
+      ],
+      "review_sets": [
+        "visual_bible"
+      ],
+      "acceptance": "Set visual_bible all PASS; period details graded; depiction policy Q-003 resolved.",
+      "spawn_prompt": "Create an agent team for 'character_environment_design'. Spawn teammates using these agent types: visual-development-supervisor, historical-fact-checker, continuity-supervisor. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce CHARACTER_BIBLE.md, ENVIRONMENT_BIBLE.md, VISUAL_STYLE_GUIDE.md; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "storyboard_shot_planning": {
+      "mission": "Break scenes into feasible, continuous, well-composed shots.",
+      "mode": "hybrid",
+      "why_this_mode": "Planner works alone; director and continuity review concurrently.",
+      "creators": [
+        "shot-planner"
+      ],
+      "reviewers": [
+        "continuity-supervisor",
+        "film-director"
+      ],
+      "inputs": [
+        "SCREENPLAY.md",
+        "CHARACTER_BIBLE.md",
+        "ENVIRONMENT_BIBLE.md",
+        "VISUAL_STYLE_GUIDE.md"
+      ],
+      "outputs": [
+        "SHOT_LIST.csv"
+      ],
+      "depends_on": [
+        "character_environment_design",
+        "film_direction_cinematography"
+      ],
+      "review_sets": [
+        "shot_list"
+      ],
+      "acceptance": "Set shot_list all PASS; ID validation clean; totals within 5% of runtime.",
+      "spawn_prompt": "Create an agent team for 'storyboard_shot_planning'. Spawn teammates using these agent types: shot-planner, continuity-supervisor, film-director. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce SHOT_LIST.csv; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "image_video_generation": {
+      "mission": "Produce shots that pass review, using adaptive retries driven by error analysis.",
+      "mode": "agent_team",
+      "why_this_mode": "Image and video producers share keyframes and failure findings in real time; parallel across independent shots.",
+      "creators": [
+        "image-producer",
+        "video-producer"
+      ],
+      "reviewers": [
+        "film-quality-reviewer",
+        "continuity-supervisor"
+      ],
+      "inputs": [
+        "SHOT_LIST.csv (approved)",
+        "prompts/",
+        "authorized spend"
+      ],
+      "outputs": [
+        "media/images/**",
+        "media/video/**",
+        "GENERATION_LOG.csv"
+      ],
+      "depends_on": [
+        "storyboard_shot_planning"
+      ],
+      "review_sets": [
+        "shot_media",
+        "proof_of_concept"
+      ],
+      "acceptance": "Each shot has an accepted shot_media review of the exact output file; spend stayed within authorizations.",
+      "spawn_prompt": "Create an agent team for 'image_video_generation'. Spawn teammates using these agent types: image-producer, video-producer, film-quality-reviewer, continuity-supervisor. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce media/images/**, media/video/**, GENERATION_LOG.csv; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "sound_voice_production": {
+      "mission": "Deliver English dialogue, ambience, SFX and music matching the picture.",
+      "mode": "subagents",
+      "why_this_mode": "Bounded audio tasks with an independent listener.",
+      "creators": [
+        "sound-producer"
+      ],
+      "reviewers": [
+        "audio-reviewer"
+      ],
+      "inputs": [
+        "SCREENPLAY.md (approved)",
+        "SHOT_LIST.csv",
+        "CHARACTER_BIBLE.md"
+      ],
+      "outputs": [
+        "reviews/SOUND_PLAN.md",
+        "media/audio/**"
+      ],
+      "depends_on": [
+        "storyboard_shot_planning"
+      ],
+      "review_sets": [
+        "dialogue_audio"
+      ],
+      "acceptance": "Set dialogue_audio all PASS with measured levels and sync offsets.",
+      "spawn_prompt": "Create an agent team for 'sound_voice_production'. Spawn teammates using these agent types: sound-producer, audio-reviewer. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce reviews/SOUND_PLAN.md, media/audio/**; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "editing_finishing": {
+      "mission": "Assemble approved shots and audio into the rough cut and final master.",
+      "mode": "subagents",
+      "why_this_mode": "Deterministic assembly (FFmpeg) with three independent reviewers.",
+      "creators": [
+        "film-editor"
+      ],
+      "reviewers": [
+        "film-quality-reviewer",
+        "audio-reviewer",
+        "continuity-supervisor"
+      ],
+      "inputs": [
+        "approved shots",
+        "approved audio",
+        "PRODUCTION_PLAN.md EDL"
+      ],
+      "outputs": [
+        "media/rough_cut/*.mp4",
+        "media/final/*.mp4"
+      ],
+      "depends_on": [
+        "image_video_generation",
+        "sound_voice_production"
+      ],
+      "review_sets": [
+        "rough_cut",
+        "final_delivery"
+      ],
+      "acceptance": "Sets rough_cut / final_delivery PASS; techcheck matches delivery_spec.",
+      "spawn_prompt": "Create an agent team for 'editing_finishing'. Spawn teammates using these agent types: film-editor, film-quality-reviewer, audio-reviewer, continuity-supervisor. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce media/rough_cut/*.mp4, media/final/*.mp4; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    },
+    "independent_qa": {
+      "mission": "Evidence-based gatekeeping across the whole film, independent of production.",
+      "mode": "agent_team",
+      "why_this_mode": "Parallel specialist reviewers testing competing hypotheses about defects find more issues together.",
+      "creators": [],
+      "reviewers": [
+        "film-quality-reviewer",
+        "continuity-supervisor",
+        "audio-reviewer",
+        "historical-fact-checker"
+      ],
+      "inputs": [
+        "any deliverable under review"
+      ],
+      "outputs": [
+        "reviews/QC_*.md",
+        "review cycles"
+      ],
+      "depends_on": [],
+      "review_sets": [
+        "shot_media",
+        "rough_cut",
+        "final_delivery"
+      ],
+      "acceptance": "No acceptance without inspected evidence; unverifiable items escalated to human review.",
+      "spawn_prompt": "Create an agent team for 'independent_qa'. Spawn teammates using these agent types: film-quality-reviewer, continuity-supervisor, audio-reviewer, historical-fact-checker. Each teammate must first invoke the skills named in its agent definition (teammates do NOT get skills preloaded) and read the approved project files. Creators produce reviews/QC_*.md, review cycles; reviewers work independently and never edit creator files. Close every deliverable with the review-and-revision-loop (studio.py review open/close) and only report PASS with evidence. Do not approve gates; do not spend money.",
+      "fallback": "If Agent Teams are disabled (default), run the same roles as sequential/parallel subagents from the Executive Producer; creator and reviewer remain different agents."
+    }
+  }
+}

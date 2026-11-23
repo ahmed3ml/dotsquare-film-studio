@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "note": "Adapters are contracts, not integrations. None is assumed connected. Detection can only prove local binaries and env-var NAMES; MCP/connector tools must be inspected by the agent in the live session. Never store credential values here.",
+  "adapters": {
+    "image-generation": {
+      "kind": "external",
+      "purpose": "Create images (character/environment references, keyframes) from prompt files.",
+      "input": "prompts/images/<id>.md (prompt, negative, refs, aspect, seed policy)",
+      "output": "media/images/<shot_id>/vNN.<ext> + PRODUCTION_LOG row + AS- id",
+      "detect": {"env": ["OPENAI_API_KEY", "STABILITY_API_KEY", "REPLICATE_API_TOKEN", "FAL_KEY", "GOOGLE_API_KEY"], "mcp_hint": "image generation tools exposed in the session"},
+      "paid": true,
+      "fallback": "Write prompt files; stage -> BLOCKED_EXTERNAL_TOOL",
+      "stages": ["visual_development", "storyboard", "image_production"]
+    },
+    "video-generation": {
+      "kind": "external",
+      "purpose": "Create shot clips (text-to-video / image-to-video).",
+      "input": "prompts/video/<shot_id>.md (motion prompt, start frame, duration, aspect, fps)",
+      "output": "media/video/<shot_id>/vNN.mp4 + log row; probed with media-inspection",
+      "detect": {"env": ["RUNWAY_API_SECRET", "LUMA_API_KEY", "KLING_API_KEY", "FAL_KEY", "REPLICATE_API_TOKEN", "GOOGLE_API_KEY"], "mcp_hint": "video generation tools exposed in the session"},
+      "paid": true,
+      "fallback": "Write prompt files; stage -> BLOCKED_EXTERNAL_TOOL",
+      "stages": ["proof_of_concept", "video_production"]
+    },
+    "speech-generation": {
+      "kind": "external",
+      "purpose": "Create English dialogue/narration audio.",
+      "input": "reviews/SOUND_PLAN.md dialogue sheet",
+      "output": "media/audio/dialogue/<line_id>.wav",
+      "detect": {"env": ["ELEVENLABS_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY"], "mcp_hint": "text-to-speech tools exposed in the session"},
+      "paid": true,
+      "fallback": "Produce dialogue sheet and recording script; stage -> BLOCKED_EXTERNAL_TOOL",
+      "stages": ["sound"]
+    },
+    "local-files": {
+      "kind": "local",
+      "purpose": "Read/write project files, hashing, versioning.",
+      "input": "project folder",
+      "output": "files + sha256 manifest",
+      "detect": {"always": true},
+      "paid": false,
+      "fallback": "none required",
+      "stages": ["all"]
+    },
+    "video-editing": {
+      "kind": "local-or-external",
+      "purpose": "Assemble cuts beyond what FFmpeg scripting offers (NLE project export).",
+      "input": "EDL in PRODUCTION_PLAN.md",
+      "output": "media/rough_cut/*.mp4",
+      "detect": {"bins": ["ffmpeg"], "mcp_hint": "any NLE/video-render tool in the session"},
+      "paid": false,
+      "fallback": "FFmpeg concat recipe or written EDL",
+      "stages": ["editing"]
+    },
+    "audio-processing": {
+      "kind": "local",
+      "purpose": "Mix, normalise, convert audio.",
+      "input": "media/audio/**",
+      "output": "media/audio/mix/*.wav",
+      "detect": {"bins": ["ffmpeg", "sox"]},
+      "paid": false,
+      "fallback": "Written mix instructions",
+      "stages": ["sound", "editing"]
+    },
+    "ffmpeg": {
+      "kind": "local",
+      "purpose": "Transcode, concat, mux, scale, extract frames.",
+      "input": "media files",
+      "output": "media files",
+      "detect": {"bins": ["ffmpeg", "ffprobe"]},
+      "paid": false,
+      "fallback": "Provide commands for the human to run",
+      "stages": ["editing", "quality_control", "delivery"]
+    },
+    "media-inspection": {
+      "kind": "local",
+      "purpose": "Report real duration, resolution, fps, codecs, audio of a media file.",
+      "input": "any media file",
+      "output": "JSON (studio.py probe)",
+      "detect": {"bins": ["ffprobe"]},
+      "paid": false,
+      "fallback": "Mark media NOT_VERIFIED",
+      "stages": ["all"]
+    }
+  }
+}

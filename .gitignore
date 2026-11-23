@@ -1,0 +1,20 @@
+# الأفلام والمشاريع (ميديا كبيرة، بتتحفظ على الجهاز بس)
+أفلام/
+projects/
+
+# ملفات الجهاز والأدوات
+.DS_Store
+.playwright-mcp/
+.claude/settings.local.json
+__pycache__/
+*.pyc
+
+# أي ميديا تتولد بالغلط برا فولدر المشاريع
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# أسرار
+.env
+.env.*

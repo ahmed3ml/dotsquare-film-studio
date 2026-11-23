@@ -1,0 +1,5 @@
+#!/bin/sh
+# Wrapper so headless agents can be allow-listed for exactly `studio.py attempt record`
+# (Claude Code does not honour prefix allow-rules for interpreter commands like `python3 ...`).
+DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+exec python3 "$DIR/studio/studio.py" attempt record "$@"

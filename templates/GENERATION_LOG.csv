@@ -1,0 +1,1 @@
+attempt_id,timestamp,shot_id,capability,phase,provider,model,kind,outcome,failure_category,error_analysis,strategy_change,cost_usd,authorization,output_path,output_sha256,synthetic,notes

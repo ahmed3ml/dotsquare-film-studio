@@ -1,0 +1,1 @@
+shot_id,scene_id,seq,description,shot_type,camera_angle,camera_movement,lens_mm,duration_s,characters,environment_id,props,time_of_day,weather,dialogue_ref,sfx_notes,music_cue,transition_in,transition_out,image_prompt,video_prompt,ref_assets,status,retries,notes

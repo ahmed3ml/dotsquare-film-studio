@@ -1,0 +1,386 @@
+{
+  "schema_version": "1.1",
+  "project_id": "{{PROJECT_ID}}",
+  "title": "{{TITLE}}",
+  "language": "English",
+  "runtime_minutes": 5.0,
+  "created_at": "2026-11-11T16:56:24Z",
+  "updated_at": "2026-11-11T17:09:36Z",
+  "current_stage": null,
+  "facts": {
+    "concept_approved": true,
+    "screenplay_approved": false,
+    "visual_identity_approved": false,
+    "budget_approved": false,
+    "production_tools_approved": false
+  },
+  "gates": {
+    "GATE-01": {
+      "name": "Historical research and story concept",
+      "name_ar": "\u0627\u0644\u0628\u062d\u062b \u0627\u0644\u062a\u0627\u0631\u064a\u062e\u064a \u0648\u0641\u0643\u0631\u0629 \u0627\u0644\u0642\u0635\u0629",
+      "deliverables": [
+        "HISTORICAL_BIBLE.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-02": {
+      "name": "Story treatment",
+      "name_ar": "\u0627\u0644\u0645\u0639\u0627\u0644\u062c\u0629 \u0627\u0644\u0642\u0635\u0635\u064a\u0629",
+      "deliverables": [
+        "STORY_TREATMENT.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-03": {
+      "name": "Final screenplay",
+      "name_ar": "\u0627\u0644\u0633\u064a\u0646\u0627\u0631\u064a\u0648 \u0627\u0644\u0646\u0647\u0627\u0626\u064a",
+      "deliverables": [
+        "SCREENPLAY.md",
+        "reviews/SCRIPT_REVIEW.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-04": {
+      "name": "Character designs and visual bible",
+      "name_ar": "\u062a\u0635\u0645\u064a\u0645 \u0627\u0644\u0634\u062e\u0635\u064a\u0627\u062a \u0648\u0627\u0644\u062f\u0644\u064a\u0644 \u0627\u0644\u0628\u0635\u0631\u064a",
+      "deliverables": [
+        "CHARACTER_BIBLE.md",
+        "ENVIRONMENT_BIBLE.md",
+        "VISUAL_STYLE_GUIDE.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-05": {
+      "name": "Storyboard and shot list",
+      "name_ar": "\u0627\u0644\u0644\u0648\u062d\u0629 \u0627\u0644\u0642\u0635\u0635\u064a\u0629 \u0648\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0644\u0642\u0637\u0627\u062a",
+      "deliverables": [
+        "SHOT_LIST.csv"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-06": {
+      "name": "Initial proof-of-concept video",
+      "name_ar": "\u0641\u064a\u062f\u064a\u0648 \u0625\u062b\u0628\u0627\u062a \u0627\u0644\u0645\u0641\u0647\u0648\u0645",
+      "deliverables": [
+        "media/proof_of_concept/*.mp4",
+        "media/proof_of_concept/PROOF_REPORT.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-07": {
+      "name": "Full-production budget and execution plan",
+      "name_ar": "\u0627\u0644\u0645\u064a\u0632\u0627\u0646\u064a\u0629 \u0648\u062e\u0637\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630 \u0627\u0644\u0643\u0627\u0645\u0644\u0629",
+      "deliverables": [
+        "PRODUCTION_PLAN.md",
+        "COST_TRACKER.csv"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-08": {
+      "name": "Rough cut",
+      "name_ar": "\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u0645\u0628\u062f\u0626\u064a\u0629 (Rough Cut)",
+      "deliverables": [
+        "media/rough_cut/*.mp4",
+        "reviews/QC_ROUGH_CUT.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    },
+    "GATE-09": {
+      "name": "Final film delivery",
+      "name_ar": "\u0627\u0644\u062a\u0633\u0644\u064a\u0645 \u0627\u0644\u0646\u0647\u0627\u0626\u064a \u0644\u0644\u0641\u064a\u0644\u0645",
+      "deliverables": [
+        "media/final/*.mp4",
+        "DELIVERY_CHECKLIST.md",
+        "reviews/QC_FINAL.md"
+      ],
+      "state": "NOT_STARTED",
+      "version": 0,
+      "submitted_at": null,
+      "submitted_fingerprints": {},
+      "approved_by": null,
+      "approved_at": null,
+      "locked": {},
+      "history": []
+    }
+  },
+  "stages": {
+    "research": {
+      "state": "NOT_STARTED",
+      "owner": "historical-researcher",
+      "requires_gate": null,
+      "requires_stages": [],
+      "produces_gate": "GATE-01",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "story": {
+      "state": "NOT_STARTED",
+      "owner": "story-developer",
+      "requires_gate": "GATE-01",
+      "requires_stages": [
+        "research"
+      ],
+      "produces_gate": "GATE-02",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "screenplay": {
+      "state": "NOT_STARTED",
+      "owner": "screenwriter",
+      "requires_gate": "GATE-02",
+      "requires_stages": [
+        "story"
+      ],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "script_review": {
+      "state": "NOT_STARTED",
+      "owner": "script-reviewer",
+      "requires_gate": "GATE-02",
+      "requires_stages": [
+        "screenplay"
+      ],
+      "produces_gate": "GATE-03",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "directing": {
+      "state": "NOT_STARTED",
+      "owner": "film-director",
+      "requires_gate": "GATE-03",
+      "requires_stages": [],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "visual_development": {
+      "state": "NOT_STARTED",
+      "owner": "visual-development-supervisor",
+      "requires_gate": "GATE-03",
+      "requires_stages": [],
+      "produces_gate": "GATE-04",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "storyboard": {
+      "state": "NOT_STARTED",
+      "owner": "shot-planner",
+      "requires_gate": "GATE-04",
+      "requires_stages": [
+        "directing"
+      ],
+      "produces_gate": "GATE-05",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "proof_of_concept": {
+      "state": "NOT_STARTED",
+      "owner": "video-producer",
+      "requires_gate": "GATE-05",
+      "requires_stages": [],
+      "produces_gate": "GATE-06",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "production_planning": {
+      "state": "NOT_STARTED",
+      "owner": "executive-producer",
+      "requires_gate": "GATE-06",
+      "requires_stages": [],
+      "produces_gate": "GATE-07",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "image_production": {
+      "state": "NOT_STARTED",
+      "owner": "image-producer",
+      "requires_gate": "GATE-07",
+      "requires_stages": [],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "video_production": {
+      "state": "NOT_STARTED",
+      "owner": "video-producer",
+      "requires_gate": "GATE-07",
+      "requires_stages": [],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "sound": {
+      "state": "NOT_STARTED",
+      "owner": "sound-producer",
+      "requires_gate": "GATE-07",
+      "requires_stages": [],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "editing": {
+      "state": "NOT_STARTED",
+      "owner": "film-editor",
+      "requires_gate": "GATE-07",
+      "requires_stages": [
+        "video_production",
+        "sound"
+      ],
+      "produces_gate": "GATE-08",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "quality_control": {
+      "state": "NOT_STARTED",
+      "owner": "film-quality-reviewer",
+      "requires_gate": "GATE-08",
+      "requires_stages": [
+        "editing"
+      ],
+      "produces_gate": null,
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    },
+    "delivery": {
+      "state": "NOT_STARTED",
+      "owner": "executive-producer",
+      "requires_gate": "GATE-08",
+      "requires_stages": [
+        "quality_control"
+      ],
+      "produces_gate": "GATE-09",
+      "started_at": null,
+      "completed_at": null,
+      "note": ""
+    }
+  },
+  "tasks": [],
+  "blockers": [],
+  "budget": {
+    "currency": "USD",
+    "approved_total": null,
+    "approved_by": null,
+    "rates": {
+      "image_job": null,
+      "video_second": null,
+      "speech_minute": null,
+      "images_per_shot": 2,
+      "video_attempts_per_shot": 2,
+      "retry_allowance": 0.25
+    },
+    "warn_at_fraction": 0.8
+  },
+  "adapters": {
+    "image-generation": {
+      "status": "BLOCKED_EXTERNAL_TOOL",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "video-generation": {
+      "status": "BLOCKED_EXTERNAL_TOOL",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "speech-generation": {
+      "status": "BLOCKED_EXTERNAL_TOOL",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "local-files": {
+      "status": "AVAILABLE",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "video-editing": {
+      "status": "AVAILABLE",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "audio-processing": {
+      "status": "PARTIAL",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "ffmpeg": {
+      "status": "AVAILABLE",
+      "checked_at": "2026-11-11T16:56:25Z"
+    },
+    "media-inspection": {
+      "status": "AVAILABLE",
+      "checked_at": "2026-11-11T16:56:25Z"
+    }
+  },
+  "authorizations": [],
+  "reviews": [],
+  "delivery_spec": null,
+  "adaptive_retry": {
+    "strategy_change_after_consecutive_failures": 2,
+    "hard_cap": null
+  }
+}

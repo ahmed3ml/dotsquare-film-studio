@@ -1,0 +1,232 @@
+{
+ "_comment": "Catalogue of KNOWN provider candidates and what was actually verified. Not a routing file: copy an entry into projects/<ID>/providers.json only after the integration task for it is closed (price, licence, auth, test). Connector entries run inside a Claude Code session (claude.ai connectors / MCP); the orchestrator gives the producing agent only the listed mcp_tools. Prices are null until taken from the provider for the exact model/settings; commercial_use stays UNKNOWN until the plan's terms are read and recorded as evidence. No ranking is implied by order.",
+ "verified_on": "2026-11-13",
+ "providers": {
+  "higgsfield-connector": {
+   "type": "connector",
+   "status": "CONNECTED_READ_ONLY_VERIFIED",
+   "verified": "balance + models_explore called read-only on 2026-11-13: plan=free, credits=10; models offered for reference image-to-video include seedance_2_5, seedance_2_0, kling3_0, grok_video_v15, minimax_h3 (durations 2-30 s, up to 1080p/4k depending on model and plan)",
+   "capabilities": [
+    "image-generation",
+    "image-to-video",
+    "text-to-video",
+    "character-video",
+    "music-generation",
+    "sfx-generation"
+   ],
+   "mcp_tools": [
+    "mcp__claude_ai_higgs__generate_image",
+    "mcp__claude_ai_higgs__generate_video",
+    "mcp__claude_ai_higgs__generate_audio",
+    "mcp__claude_ai_higgs__media_upload",
+    "mcp__claude_ai_higgs__media_confirm",
+    "mcp__claude_ai_higgs__jobs_wait",
+    "mcp__claude_ai_higgs__show_generations",
+    "mcp__claude_ai_higgs__models_explore"
+   ],
+   "pricing": {
+    "image-generation": {
+     "unit": "image",
+     "price": null
+    },
+    "image-to-video": {
+     "unit": "second",
+     "price": null
+    },
+    "text-to-video": {
+     "unit": "second",
+     "price": null
+    },
+    "character-video": {
+     "unit": "second",
+     "price": null
+    }
+   },
+   "commercial_use": "UNKNOWN",
+   "open_items": [
+    "plan upgrade (free plan, 10 credits is insufficient)",
+    "credit-to-USD price per model/setting",
+    "commercial licence of the chosen plan",
+    "a 1-shot comparison test recorded as evidence"
+   ]
+  },
+  "heygen-connector": {
+   "type": "connector",
+   "status": "CONNECTED_HEADLESS_VERIFIED",
+   "verified": "get_current_user called read-only on 2026-11-13: subscription plan=creator, 58 premium credits (reset 2026-12-07). NOTE: the connected account is not under the studio owner's email - confirm it is the intended account. 2026-11-14: headless sound-producer called get_current_user successfully (creator, 58 credits); user states full authorization to use this account.",
+   "capabilities": [
+    "speech-generation",
+    "image-to-video",
+    "text-to-video"
+   ],
+   "mcp_tools": [
+    "mcp__claude_ai_HeyGen__list_voices",
+    "mcp__claude_ai_HeyGen__create_speech",
+    "mcp__claude_ai_HeyGen__image_to_video",
+    "mcp__claude_ai_HeyGen__text_to_video",
+    "mcp__claude_ai_HeyGen__get_model_video",
+    "mcp__claude_ai_HeyGen__get_video"
+   ],
+   "pricing": {
+    "speech-generation": {
+     "unit": "minute",
+     "price": null
+    },
+    "image-to-video": {
+     "unit": "second",
+     "price": null
+    }
+   },
+   "commercial_use": "UNKNOWN",
+   "open_items": [
+    "credit cost per speech minute / video second",
+    "voice licence terms",
+    "DEC-001: never used for any voice of the Prophet"
+   ],
+   "extra_allow": [
+    "Bash(studio/bin/fetch-media *)"
+   ],
+   "instructions": "DEC-001: never any voice for the Prophet. Voice per character from VOICE_CASTING.md (narration/ensemble: CH-011 voice there). BEFORE calling create_speech, check GENERATION_LOG.csv for an earlier FAILED attempt of the same shot whose error_analysis contains a heygen audio URL for the same text: if so, DOWNLOAD that URL instead of generating again (saves credits). Otherwise call create_speech ONCE per line with the exact text from the prompt file. Download ONLY with ONE standalone command (no &&, no ;, no pipes, no echo): `studio/bin/fetch-media \"<audio url>\" <output path>` (it creates the folder). Then attempt record with the real cost (credits used x 0.05 USD/s estimate)."
+  },
+  "adobe-firefly": {
+   "type": "connector",
+   "status": "NOT_AVAILABLE_AS_GENERATOR",
+   "verified": "the connected Adobe tools in this environment are editing/document tools; no Firefly image/video generation tool was found",
+   "capabilities": []
+  },
+  "google-flow-veo": {
+   "type": "command",
+   "status": "NOT_CONNECTED",
+   "verified": "no connector, CLI or credential env found",
+   "capabilities": []
+  },
+  "local-ffmpeg": {
+   "type": "local",
+   "status": "AVAILABLE",
+   "verified": "ffmpeg/ffprobe 8.1.2 present",
+   "capabilities": [
+    "video-editing",
+    "audio-mixing",
+    "media-inspection"
+   ]
+  },
+  "google-flow-browser": {
+   "type": "connector",
+   "status": "CONNECTED_BROWSER_VERIFIED",
+   "verified": "2026-11-14: user's own Chrome attached via chrome-devtools-mcp --autoConnect (remote debugging enabled by the user); flow.google.com tab signed in with existing projects; headless video-producer listed pages successfully. No generation run yet.",
+   "capabilities": [
+    "image-generation",
+    "image-to-video",
+    "text-to-video",
+    "video-generation"
+   ],
+   "mcp_config": "adapters/mcp/chrome-live.json",
+   "mcp_tools": [
+    "mcp__chrome-live__list_pages",
+    "mcp__chrome-live__new_page",
+    "mcp__chrome-live__select_page",
+    "mcp__chrome-live__navigate_page",
+    "mcp__chrome-live__take_snapshot",
+    "mcp__chrome-live__take_screenshot",
+    "mcp__chrome-live__click",
+    "mcp__chrome-live__fill",
+    "mcp__chrome-live__type_text",
+    "mcp__chrome-live__press_key",
+    "mcp__chrome-live__upload_file",
+    "mcp__chrome-live__wait_for",
+    "mcp__chrome-live__evaluate_script",
+    "mcp__chrome-live__list_network_requests",
+    "mcp__chrome-live__get_network_request",
+    "mcp__chrome-live__close_page"
+   ],
+   "instructions": "Work ONLY in a NEW tab you open yourself on https://flow.google.com/ (the user's own signed-in Chrome). Never read, switch to, or close any other tab. Never change account, plan, billing or settings. Use (or create) the Flow project named after the film ID. Paste the prompt file text exactly; for image-to-video upload the input keyframe. Before pressing generate, read the credit cost Flow shows and STOP with outcome FAILED (failure-category COST_UNKNOWN) if it exceeds the engine price. Wait for completion, download the result and save it to the given output path, then close your tab.",
+   "pricing": {
+    "image-generation": {
+     "unit": "image",
+     "price": null
+    },
+    "image-to-video": {
+     "unit": "clip",
+     "price": null
+    },
+    "text-to-video": {
+     "unit": "clip",
+     "price": null
+    }
+   },
+   "commercial_use": "UNKNOWN",
+   "open_items": [
+    "user's Google plan and Flow credit balance",
+    "credit cost per model/clip",
+    "commercial-use terms of the user's plan",
+    "1-shot test"
+   ]
+  },
+  "google-flow-mcp": {
+   "type": "connector",
+   "status": "CONNECTED_VERIFIED",
+   "verified": "2026-11-15: flow MCP (local, ~/flow-mcp) flow_status: signed in, plan PRO, 1050 credits. 2026-11-14 browser test: Nano Banana 2.1 image quoted and charged 0 credits.",
+   "capabilities": [
+    "image-generation",
+    "image-to-video",
+    "text-to-video",
+    "video-generation"
+   ],
+   "mcp_config": null,
+   "mcp_strict": false,
+   "mcp_tools": [
+    "mcp__flow__flow_status",
+    "mcp__flow__flow_new_project",
+    "mcp__flow__flow_assets",
+    "mcp__flow__flow_generate",
+    "mcp__flow__flow_wait",
+    "mcp__flow__flow_download",
+    "mcp__flow__flow_retry",
+    "mcp__flow__flow_techniques"
+   ],
+   "models": {
+    "image-generation": "Nano Banana 2.1",
+    "image-to-video": "Omni 1.1 Flash",
+    "text-to-video": "Omni 1.1 Flash",
+    "video-generation": "Omni 1.1 Flash"
+   },
+   "pricing": {
+    "image-generation": {
+     "unit": "image",
+     "price": 0.0,
+     "basis": "Flow quotes 0 credits for Nano Banana (observed 2026-11-14)"
+    },
+    "image-to-video": {
+     "unit": "second",
+     "price": 0.035,
+     "basis": "Omni 1.1 Flash 7 credits/4 s, 12 credits/8 s (flow_status); 1 credit ~ 0.02 USD (Google AI Pro, 1000 credits/month); conservative 1.75 credits/s"
+    },
+    "text-to-video": {
+     "unit": "second",
+     "price": 0.035,
+     "basis": "as image-to-video"
+    },
+    "video-generation": {
+     "unit": "second",
+     "price": 0.035,
+     "basis": "as image-to-video"
+    }
+   },
+   "commercial_use": "UNKNOWN",
+   "instructions": "Use ONLY the mcp__flow__* tools. 1) flow_status; if it returns a hint (not signed in etc.) record outcome FAILED with that hint. 2) Work in the Flow project titled with the film ID (e.g. 'MUTAH-PILOT'): if flow_status shows a different project and flow_assets shows none of this film's assets, call flow_new_project with the film ID once. 3) Call flow_generate with project=<film ID>, ONE scene: the prompt file text (English; Flow has no negative field, so do not paste 'no ...' phrases), type image (keyframes, 16:9) or video (16:9, model 'Omni 1.1 Flash', duration = shot duration rounded UP to 4/6/8/10, resolution 720p, first_frame = absolute path of the input keyframe for image-to-video), variants 1, retries 1, max_credits 12 for video / 0 for images. 4) flow_wait until finished. 5) The file lands in /Users/ahmedabdelrahman/flow-mcp-out/<project>/; convert/copy it to the exact output path (images: `sips -s format png <src> --out <dst>`; video: `cp <src> <dst>`), then `studio/bin/attempt-record ...` with the REAL credits used converted at 0.02 USD/credit (images 0). Never record SUCCESS without the copied file. Run `studio/bin/attempt-record` as ONE standalone command (no `cd`, no `&&`, no pipes) or it is refused. CHARACTER REFERENCES: read the shot's `characters` column in SHOT_LIST.csv and map each CH-xxx to its Flow character via projects/<ID>/media/characters/FLOW_CHARACTERS.json (e.g. CH-001 -> 'asset:Khalid'). Pass up to 3 (principals first) as 'asset:<name>' entries in the scene's reference_images (images and text-to-video only; for image-to-video the keyframe already carries them). If a CH-xxx has no Flow character, fall back to the ABSOLUTE path of projects/<ID>/media/characters/CH-xxx.png. Never create or edit Flow characters yourself.",
+   "open_items": [
+    "commercial-use terms of the user's Google AI Pro plan",
+    "credit price per USD"
+   ],
+   "add_dirs": [
+    "/Users/ahmedabdelrahman/flow-mcp-out"
+   ],
+   "extra_allow": [
+    "Bash(cp /Users/ahmedabdelrahman/flow-mcp-out/*)",
+    "Bash(sips -s format png /Users/ahmedabdelrahman/flow-mcp-out/*)",
+    "Bash(ls /Users/ahmedabdelrahman/flow-mcp-out*)",
+    "Bash(ffmpeg -y -i /Users/ahmedabdelrahman/flow-mcp-out/*)"
+   ]
+  }
+ }
+}

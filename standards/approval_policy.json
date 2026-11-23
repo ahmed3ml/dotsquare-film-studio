@@ -1,0 +1,28 @@
+{
+  "_comment": "Default AUTO_APPROVAL policy copied into each new project as projects/<ID>/approval_policy.json. Engine-enforced (studio/autonomy.py). Agents cannot edit the project copy (hook-guarded); humans change it with `studio.py policy ...`. GATE-07 (budget/spending) is a hard human gate in code and cannot be set to policy. A gate listed in client_approval_gates always needs a human. External requirements block ANY approval (human or policy) of their gate until a human records documented evidence.",
+  "schema_version": "1.0",
+  "auto_approval": {"enabled": true},
+  "gate_modes": {
+    "GATE-01": "policy",
+    "GATE-02": "policy",
+    "GATE-03": "policy",
+    "GATE-04": "policy",
+    "GATE-05": "policy",
+    "GATE-06": "policy",
+    "GATE-07": "human",
+    "GATE-08": "policy",
+    "GATE-09": "policy"
+  },
+  "always_human_gates": ["GATE-07"],
+  "client_approval_gates": [],
+  "external_requirements": [],
+  "content_holds": [],
+  "review_loop": {"max_failed_cycles": 3, "max_job_retries": 2},
+  "spending": {
+    "unattended_paid_generation": false,
+    "authorization": null,
+    "per_job_llm_cap_usd": 15,
+    "llm_budget_usd": null
+  },
+  "scope_lock": {"file": "PROJECT.md", "sha256": null, "by": null, "at": null}
+}

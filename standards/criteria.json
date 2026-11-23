@@ -1,0 +1,379 @@
+{
+  "schema_version": "1.0",
+  "policy": "Acceptance is evidence-based: a criterion is PASS only with concrete evidence; media criteria (media=true) require evidence files produced by direct inspection (frames, measurements) or the result must be NOT_VERIFIED, which forces human review. No numeric scores.",
+  "sets": {
+    "historical_research": [
+      {
+        "id": "HR-1",
+        "text": "Every claim is labelled ESTABLISHED/DISPUTED/UNKNOWN/DRAMATIZATION and has an ID",
+        "media": false
+      },
+      {
+        "id": "HR-2",
+        "text": "Each cited source exists, is named precisely, was actually consulted, and has a reliability note; no invented URLs/pages/quotes",
+        "media": false
+      },
+      {
+        "id": "HR-3",
+        "text": "Core sequence of events and commanders is supported by at least two independent sources, or flagged DISPUTED",
+        "media": false
+      },
+      {
+        "id": "HR-4",
+        "text": "Uncertainty (numbers, manoeuvres, dates) is documented with ranges and who claims what",
+        "media": false
+      },
+      {
+        "id": "HR-5",
+        "text": "Depiction constraints and open cultural/religious questions are recorded; nothing contradicts PROJECT.md hard constraints",
+        "media": false
+      }
+    ],
+    "story_treatment": [
+      {
+        "id": "ST-1",
+        "text": "Dramatic coherence: clear protagonist question, escalation, turning point and resolution within the runtime",
+        "media": false
+      },
+      {
+        "id": "ST-2",
+        "text": "Every beat carries a fidelity tag that matches the approved HISTORICAL_BIBLE; no disputed point is resolved by invention",
+        "media": false
+      },
+      {
+        "id": "ST-3",
+        "text": "Runtime allocation sums to the target within 5%",
+        "media": false
+      },
+      {
+        "id": "ST-4",
+        "text": "Protagonist centrality while preceding commanders are represented accurately",
+        "media": false
+      },
+      {
+        "id": "ST-5",
+        "text": "AI-production feasibility notes are realistic (faces, crowds, action)",
+        "media": false
+      }
+    ],
+    "screenplay": [
+      {
+        "id": "SP-1",
+        "text": "Historical consistency with the approved bible; all invented dialogue is tagged DRAMATIZATION; no fabricated quotes presented as authentic",
+        "media": false
+      },
+      {
+        "id": "SP-2",
+        "text": "Dramatic coherence and pacing: each scene has want/obstacle/outcome; runtime within 5% of target",
+        "media": false
+      },
+      {
+        "id": "SP-3",
+        "text": "English dialogue quality: period-plausible voice, no modern idiom, speakable, economical, subtext over exposition",
+        "media": false
+      },
+      {
+        "id": "SP-4",
+        "text": "Character continuity: names, titles, knowledge, emotional arc consistent across scenes",
+        "media": false
+      },
+      {
+        "id": "SP-5",
+        "text": "Production feasibility for AI generation; scene IDs stable and unique",
+        "media": false
+      },
+      {
+        "id": "SP-6",
+        "text": "Matches the approved treatment beat for beat, or deviations are listed and justified",
+        "media": false
+      }
+    ],
+    "visual_bible": [
+      {
+        "id": "VB-1",
+        "text": "Identity locks are specific enough to reproduce a face/body/wardrobe consistently; identity prompts exist for each principal",
+        "media": false
+      },
+      {
+        "id": "VB-2",
+        "text": "Period plausibility of costume, armour, weapons, architecture, terrain is graded DOCUMENTED/PLAUSIBLE/INVENTED against the historical bible",
+        "media": false
+      },
+      {
+        "id": "VB-3",
+        "text": "Geography map and time/weather per scene are unambiguous and consistent with the screenplay",
+        "media": false
+      },
+      {
+        "id": "VB-4",
+        "text": "Style guide defines photorealistic look, palette, lighting, prompt grammar and negative prompt",
+        "media": false
+      },
+      {
+        "id": "VB-5",
+        "text": "Reference images (if any exist) match the written identity locks",
+        "media": true
+      },
+      {
+        "id": "VB-6",
+        "text": "Depiction policy (Q-003) is resolved and respected; no prohibited depiction",
+        "media": false
+      }
+    ],
+    "shot_list": [
+      {
+        "id": "SL-1",
+        "text": "Every shot references valid scene/character/environment/prop IDs from approved bibles",
+        "media": false
+      },
+      {
+        "id": "SL-2",
+        "text": "Temporal and spatial continuity: screen direction, time of day, weather, costume/damage state are consistent across consecutive shots",
+        "media": false
+      },
+      {
+        "id": "SL-3",
+        "text": "Cinematic composition and coverage: each scene has establishing/medium/close variety suited to its dramatic intent",
+        "media": false
+      },
+      {
+        "id": "SL-4",
+        "text": "Durations are feasible for AI video and total within 5% of runtime",
+        "media": false
+      },
+      {
+        "id": "SL-5",
+        "text": "Prompts follow the style-guide grammar, reuse identity/environment prompts verbatim and contain no anachronism",
+        "media": false
+      }
+    ],
+    "proof_of_concept": [
+      {
+        "id": "PC-1",
+        "text": "Visual realism: photoreal at full resolution, no obvious AI artefacts",
+        "media": true
+      },
+      {
+        "id": "PC-2",
+        "text": "Motion quality: no morphing, jitter, floating, physics breaks across the clip",
+        "media": true
+      },
+      {
+        "id": "PC-3",
+        "text": "Anatomical correctness: hands, faces, limbs, horses, weapon grip",
+        "media": true
+      },
+      {
+        "id": "PC-4",
+        "text": "Character consistency with the approved identity lock",
+        "media": true
+      },
+      {
+        "id": "PC-5",
+        "text": "Cinematic composition and lighting match the style guide",
+        "media": true
+      },
+      {
+        "id": "PC-6",
+        "text": "Technical properties (resolution, fps, codec, duration) measured with probe and recorded",
+        "media": true
+      },
+      {
+        "id": "PC-7",
+        "text": "Report states tool, model, attempts, failures and actual costs truthfully",
+        "media": false
+      }
+    ],
+    "production_plan": [
+      {
+        "id": "PP-1",
+        "text": "Plan covers every remaining stage with owner, dependencies, tools and fallbacks",
+        "media": false
+      },
+      {
+        "id": "PP-2",
+        "text": "Cost plan separates estimate from actual, uses real provider pricing, and includes failure/revision allowance",
+        "media": false
+      },
+      {
+        "id": "PP-3",
+        "text": "Per-batch authorization points are defined; no spend is assumed approved",
+        "media": false
+      },
+      {
+        "id": "PP-4",
+        "text": "Risks and BLOCKED_EXTERNAL_TOOL items are listed honestly",
+        "media": false
+      }
+    ],
+    "rough_cut": [
+      {
+        "id": "RC-1",
+        "text": "Temporal and spatial continuity across cuts (screen direction, light, wardrobe, geography)",
+        "media": true
+      },
+      {
+        "id": "RC-2",
+        "text": "Pacing and runtime within 5% of target; scene order matches screenplay",
+        "media": true
+      },
+      {
+        "id": "RC-3",
+        "text": "Audio synchronization: dialogue/SFX aligned with picture (measured offset and listening notes)",
+        "media": true
+      },
+      {
+        "id": "RC-4",
+        "text": "Dialogue delivery quality in English: intelligibility, performance, no artefacts",
+        "media": true
+      },
+      {
+        "id": "RC-5",
+        "text": "Every shot used is APPROVED with a matching accepted shot review",
+        "media": false
+      },
+      {
+        "id": "RC-6",
+        "text": "Historical continuity and no prohibited depiction in any frame",
+        "media": true
+      }
+    ],
+    "final_delivery": [
+      {
+        "id": "FD-1",
+        "text": "Technical delivery specification met (resolution, fps, codec, container, loudness, duration) — measured",
+        "media": true
+      },
+      {
+        "id": "FD-2",
+        "text": "Visual and audio integrity across the full runtime (no dropped frames, glitches, clipping)",
+        "media": true
+      },
+      {
+        "id": "FD-3",
+        "text": "Subtitles/credits/DRAMATIZATION notices present as required by the brief",
+        "media": false
+      },
+      {
+        "id": "FD-4",
+        "text": "Checksums, manifest, source register and cost reconciliation delivered",
+        "media": false
+      },
+      {
+        "id": "FD-5",
+        "text": "No unresolved BLOCKER findings from any review cycle",
+        "media": false
+      }
+    ],
+    "shot_media": [
+      {
+        "id": "SM-1",
+        "text": "Visual realism: photoreal, no plastic skin, no melted detail",
+        "media": true
+      },
+      {
+        "id": "SM-2",
+        "text": "Cinematic composition: framing, depth, lens feel, lighting direction match the shot list and style guide",
+        "media": true
+      },
+      {
+        "id": "SM-3",
+        "text": "Motion quality: smooth, physically plausible, no morphing or jitter (video only)",
+        "media": true
+      },
+      {
+        "id": "SM-4",
+        "text": "Anatomical correctness: hands, faces, limbs, mounts, weapons",
+        "media": true
+      },
+      {
+        "id": "SM-5",
+        "text": "Character consistency vs identity lock and reference images",
+        "media": true
+      },
+      {
+        "id": "SM-6",
+        "text": "Temporal and spatial continuity with neighbouring shots (time, weather, direction, wardrobe state)",
+        "media": true
+      },
+      {
+        "id": "SM-7",
+        "text": "Period plausibility: no anachronistic objects, text or logos",
+        "media": true
+      },
+      {
+        "id": "SM-8",
+        "text": "No prohibited depiction (Prophet Muhammad) and depiction policy respected",
+        "media": true
+      }
+    ],
+    "dialogue_audio": [
+      {
+        "id": "DA-1",
+        "text": "English dialogue text matches the approved screenplay verbatim",
+        "media": false
+      },
+      {
+        "id": "DA-2",
+        "text": "Voice performance matches delivery notes; intelligible; no synthetic artefacts",
+        "media": true
+      },
+      {
+        "id": "DA-3",
+        "text": "Audio-to-picture synchronization measured (duration/offset) and acceptable",
+        "media": true
+      },
+      {
+        "id": "DA-4",
+        "text": "Levels: peak/loudness measured; no clipping",
+        "media": true
+      }
+    ],
+    "audio_bed": [
+      {
+        "id": "AB-1",
+        "media": true,
+        "text": "Levels measured by direct inspection: no clipping (max <= -1 dBFS), bed sits under dialogue; evidence file required"
+      },
+      {
+        "id": "AB-2",
+        "media": false,
+        "text": "Rights documented: generated, licensed or public-domain; no copyrighted music or recognisable melodies"
+      },
+      {
+        "id": "AB-3",
+        "media": true,
+        "text": "Mood, period plausibility and continuity fit the approved sound plan (no anachronistic instruments or sounds)"
+      }
+    ]
+  },
+  "gate_reviews": {
+    "GATE-01": [
+      "historical_research"
+    ],
+    "GATE-02": [
+      "story_treatment"
+    ],
+    "GATE-03": [
+      "screenplay"
+    ],
+    "GATE-04": [
+      "visual_bible"
+    ],
+    "GATE-05": [
+      "shot_list"
+    ],
+    "GATE-06": [
+      "proof_of_concept"
+    ],
+    "GATE-07": [
+      "production_plan"
+    ],
+    "GATE-08": [
+      "rough_cut"
+    ],
+    "GATE-09": [
+      "final_delivery"
+    ]
+  }
+}

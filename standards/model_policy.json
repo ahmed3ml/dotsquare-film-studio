@@ -1,0 +1,5 @@
+{
+  "note": "Single source of truth for agent models. 'strongest' resolves to the field below; change with `studio.py models apply --model <alias>` (opus, fable, or a full model id). Cheaper models are never selected automatically.",
+  "strongest": "opus",
+  "roles": {}
+}

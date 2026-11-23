@@ -1,0 +1,78 @@
+{
+  "agent": "executive-producer",
+  "permissions": {
+    "allow": [
+      "Bash(python3 studio/studio.py status:*)",
+      "Bash(python3 studio/studio.py pending:*)",
+      "Bash(python3 studio/studio.py next:*)",
+      "Bash(python3 studio/studio.py validate:*)",
+      "Bash(python3 studio/studio.py adapters:*)",
+      "Bash(python3 studio/studio.py cost summary:*)",
+      "Bash(python3 studio/studio.py cost estimate:*)",
+      "Bash(python3 studio/studio.py report:*)",
+      "Bash(python3 studio/studio.py teams:*)",
+      "Bash(python3 studio/studio.py models check:*)",
+      "Bash(python3 studio/studio.py inspect:*)",
+      "Bash(python3 studio/studio.py probe:*)",
+      "Bash(python3 studio/studio.py review criteria:*)",
+      "Bash(python3 studio/studio.py film status:*)",
+      "Bash(python3 studio/studio.py film plan:*)",
+      "Bash(python3 studio/studio.py film cost:*)",
+      "Bash(python3 studio/studio.py film shots:*)",
+      "Bash(python3 studio/studio.py film integrations:*)",
+      "Bash(python3 studio/studio.py policy show:*)",
+      "Bash(python3 studio/studio.py policy check:*)",
+      "Bash(python3 studio/studio.py external list:*)",
+      "Bash(python3 studio/studio.py hold list:*)",
+      "Bash(python3 studio/studio.py spec show:*)",
+      "Bash(python3 -m unittest:*)"
+    ],
+    "ask": [
+      "Bash(python3 studio/studio.py approve:*)",
+      "Bash(python3 studio/studio.py reject:*)",
+      "Bash(python3 studio/studio.py revise:*)",
+      "Bash(python3 studio/studio.py export:*)",
+      "Bash(python3 studio/studio.py cost add:*)",
+      "Bash(python3 studio/studio.py cost authorize:*)",
+      "Bash(python3 studio/studio.py cost set-budget:*)",
+      "Bash(python3 studio/studio.py review human-ack:*)",
+      "Bash(python3 studio/studio.py generate:*)",
+      "Bash(python3 studio/studio.py attempt record:*)",
+      "Bash(python3 studio/studio.py film new:*)",
+      "Bash(python3 studio/studio.py film start:*)",
+      "Bash(python3 studio/studio.py film resume:*)",
+      "Bash(python3 studio/studio.py film run:*)",
+      "Bash(python3 studio/studio.py film pause:*)",
+      "Bash(python3 studio/studio.py film stop:*)",
+      "Bash(python3 studio/studio.py film deliver:*)",
+      "Bash(python3 studio/studio.py film unblock:*)",
+      "Bash(python3 studio/studio.py policy set:*)",
+      "Bash(python3 studio/studio.py policy enable:*)",
+      "Bash(python3 studio/studio.py policy disable:*)",
+      "Bash(python3 studio/studio.py policy accept-scope:*)",
+      "Bash(python3 studio/studio.py policy paid-generation:*)",
+      "Bash(python3 studio/studio.py external record:*)",
+      "Bash(python3 studio/studio.py hold release:*)",
+      "Bash(python3 studio/studio.py spec set:*)"
+    ],
+    "deny": [
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(./**/*credentials*)",
+      "Read(./**/*secret*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/studio/studio.py\" hook-guard"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "_comment": "Copy to projects/<ID>/providers.json and edit. Replacing a provider = changing a route. Credentials are referenced by env var NAME only. Prices must come from the provider's own pricing; null = unknown (the engine refuses to guess).",
+  "schema_version": "1.0",
+  "providers": {
+    "prompt-file": {"type": "prompt-file", "capabilities": ["image-generation", "video-generation", "speech-generation"]},
+    "my-video-connector": {
+      "type": "connector",
+      "capabilities": ["video-generation"],
+      "model": "<model name shown by the tool>",
+      "pricing": {"video-generation": {"unit": "second", "price": null}}
+    },
+    "my-image-cli": {
+      "type": "command",
+      "capabilities": ["image-generation"],
+      "command": ["my-image-cli", "--prompt-file", "{prompt_file}", "--out", "{output}"],
+      "auth_env": ["MY_IMAGE_API_KEY"],
+      "model": "<model>",
+      "pricing": {"image-generation": {"unit": "image", "price": null}},
+      "timeout_s": 900
+    }
+  },
+  "routes": {
+    "image-generation": {"provider": "my-image-cli"},
+    "video-generation": {"provider": "my-video-connector"},
+    "speech-generation": {"provider": "prompt-file"}
+  }
+}
